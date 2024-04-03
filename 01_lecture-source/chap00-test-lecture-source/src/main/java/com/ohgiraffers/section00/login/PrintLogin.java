@@ -1,0 +1,47 @@
+package com.ohgiraffers.section00.login;
+
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+@WebServlet("/print")
+public class PrintLogin extends HttpServlet {
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        String userId = (String) req.getAttribute("userId");
+        System.out.println("forward 에서 전달받은 userId : " + userId);
+
+        StringBuilder responseText = new StringBuilder();
+        responseText.append("<!doctype html>")
+                .append("<html>\n")
+                .append("<head></head>\n")
+                .append("<body>\n")
+                .append("<h1>" + userId + "님 어서옵쇼~" + "</h1>")
+                .append("</body>\n")
+                .append("</html>");
+
+        resp.setContentType("text/html; charset=UTF-8");
+
+        PrintWriter out = resp.getWriter();
+        out.print(responseText.toString());
+
+        out.flush();
+        out.close();
+
+
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+
+
+    }
+}
